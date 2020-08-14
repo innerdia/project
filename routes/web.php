@@ -20,7 +20,13 @@ Route::get('/master', function () {
 Route::get('/items', function () {
     return view('items.index');
 });
+Route::get('/items/create', 'ProjectController@create');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
